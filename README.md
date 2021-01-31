@@ -233,7 +233,7 @@ vimの引数は引数リストという場所に格納される。後からで�
 - `:w !sudo tee % > /dev/null`
   管理者権限でファイルに書き込む。ウィザードでは`l`を押してファイルを開き直す事が推奨。
 
-## 検索
+## 検索(quickfix)
 
 - `:vim(grep) /pattern/ ** | cw`
   プロジェクト全体に検索。
@@ -241,13 +241,20 @@ vimの引数は引数リストという場所に格納される。後からで�
   検索結果をQuickFixウィンドウに表示。
   `<Enter>`で開く。別窓で開く(水平分割)には`<Ctrl + w><Enter>`。
   ※直接垂直分割で開く方法は無いようなので`<Ctrl + w><Shift + l>`で御茶を濁す。
+  ※**`{pattern}/j`フラグを付与すると最初のマッチへジャンプする挙動をキャンセルする**
 - `:cw`
   QuickFixウィンドウを表示
-- `:close もしくは :ccl`
-  QuickFixウィンドウを終了
-- QuickFixウィンドウへの移動`<Ctrl + w> + j/h/k/l`
 - `autocmd QuickFixCmdPost *grep* cwindow`
   `.vimrc`に記述すると、`:vimgrep /pattern/ ** | cw`の「 | cw」を省略する。
+- `:cn(ext) / :cp(rev)`
+  quicfixウィンドウの次・前へ進んで開く。
+  ※quickfixウィンドウにカーソルがなくても同じ。
+- `:copen / :cclose`
+  quickfixウィンドウを開く・閉じる。
+  ※quickfixウィンドウにカーソルがなくても同じ。
+- `:colder / :cnewer`
+  前・後のquickfixリストを表示する。
+  ※vimは直前の10個のリストを保持する
 
 ## その他
 - iとa
